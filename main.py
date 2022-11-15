@@ -21,7 +21,7 @@ def time_func():
     return (datetime.datetime.now()).strftime("%d:%m:%y %H:%M:%S")
 
 
-with open('logout.csv', 'a+', newline='') as csvfile:
+with open('logout.csv', 'a+', newline='',encoding='utf-8') as csvfile:
     fieldnames = ['Назва операції', 'Результат', 'Час виконання: ДД/ММ/РР Год/Хв/Сек']
     logger = csv.DictWriter(csvfile, fieldnames=fieldnames)
     logger.writeheader()
@@ -63,7 +63,7 @@ def help(message):
                      "а потім відправити новий файл \"urls.txt\" ")
 
 def logger_writer(first_par, sec_par):
-    with open('logout.csv', 'a+', newline='') as csvfile:
+    with open('logout.csv', 'a+', newline='',encoding='utf-8') as csvfile:
         fieldnames = ['Назва операції', 'Результат', 'Час виконання: ДД/ММ/РР Год/Хв/Сек']
         logger = csv.DictWriter(csvfile, fieldnames=fieldnames)
         logger.writerow({'Назва операції': first_par, 'Результат': sec_par,
