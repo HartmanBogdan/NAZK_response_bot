@@ -30,6 +30,15 @@ sitepack_nazk = ['https://interes.shtab.net/',
                  'https://mail.nazk.gov.ua/mail/?_task=mail&_mbox=INBOX',
                  'https://nacpworkspace.slack.com/']
 
+"""
+start - (старт/стоп) зупини, перед тим, як відправити новий файл.
+help - вимоги до файлу, та підсказки.
+clean - очищення ран-тайм списку.
+check_message_urls - перевірити ран-тайм список.
+start_nazk - перевірити ресурки НАЗК. таймаут - 1хв
+stop_nazk - зупинити перевірку ресурсів НАЗК.
+"""
+
 def time_func():
     return (datetime.datetime.now()).strftime("%d:%m:%y %H:%M:%S")
 
@@ -256,6 +265,9 @@ def start_nazk(message):
                 str_result += str(all) + '\n'
             str_result += str(loaded) + "/" + str(sitepack_nazk.__len__()) + " - LOADED "
             bot.send_message(message.chat.id, str_result)
+            logger_writer(first_par="Автоматична перевірка ресурсів НАЗК:   ",
+                          sec_par=str_result)
+
             #bot.send_message(message.chat.id, str(loaded) + "/" + str(sitepack_nazk.__len__()) + " - LOADED ")
             if loaded == 0:
                 bot.send_message(message.chat.id,"Check bot serverside connection or all urls are failed")
@@ -298,6 +310,8 @@ def stop_nazk(message):
     global WhileLoopFlag_nazk
     WhileLoopFlag_nazk = False
     bot.send_message(message.chat.id, 'Роботу бота по перевірці ресурсів НАЗК зупинено')
+    logger_writer(first_par="Зупинення автоматичної перевірки ресурсів НАЗК    ",
+                  sec_par='Роботу бота по перевірці ресурсів НАЗК зупинено')
 
 
 while True:
