@@ -204,10 +204,10 @@ def ssl_check(hostname):
         return hostname
 
 
-# перевіряємо ссл дата експайр, якшо менше 80днів - то алармим в чат
+# перевіряємо ссл дата експайр, якшо менше 10днів - то алармим в чат
 def ssl_alarm_check(message, hostname):
     global ssl_warning
-    if ssl_warning < 80:
+    if ssl_warning < 10:
         bot.send_message(message.chat.id,
                          hostname + " --- УВАГА, до закінчення SSL - сертифікату: " + str(ssl_warning) + " днів!!!!")
         logger_writer(first_par="УВАГА!  ",
