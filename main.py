@@ -10,7 +10,9 @@ import csv
 # in TELEGRAM - https://t.me/check_response_bot
 
 bot = telebot.TeleBot("5521564357:AAEyEl6zrML9PGMY-vunQesbEU0d4ZWdw1Y", parse_mode=None)
-
+#to run script when u close ssh session - use tmax on linux terminal
+#https://askubuntu.com/questions/8653/how-to-keep-processes-running-after-ending-ssh-session
+# in TELEGRAM - https://t.me/nazk_up_bot
 sitepack = []
 sitepack_plus = []
 WhileLoopFlag = True
