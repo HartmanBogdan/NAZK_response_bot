@@ -10,7 +10,7 @@ import csv
 # in TELEGRAM - https://t.me/check_response_bot
 
 bot = telebot.TeleBot("5521564357:AAEyEl6zrML9PGMY-vunQesbEU0d4ZWdw1Y", parse_mode=None)
-# to run script when u close ssh session - use tmax on linux terminal
+# to run script when u close ssh session - use tmux on linux terminal
 # https://askubuntu.com/questions/8653/how-to-keep-processes-running-after-ending-ssh-session
 # in TELEGRAM - https://t.me/nazk_up_bot
 sitepack = []
@@ -134,7 +134,8 @@ def downloader(message):
                 hostname = hostname[2]
                 print(hostname)
                 try:
-                    requests.get(x)
+                    #timeout was - none
+                    requests.get(x, timeout=1)
                     loaded += 1
                     print("send to ssl_check")
                     result_check = ssl_check(x)
@@ -168,7 +169,8 @@ def check_message_urls(message):
     for x in sitepack_plus:
 
         try:
-            requests.get(x)
+            # timeout was - none
+            requests.get(x, timeout=1)
             loaded += 1
             result_check = ssl_check(x)
             bot.send_message(message.chat.id, result_check)
@@ -198,7 +200,8 @@ def ssl_check(hostname):
         context = ssl.create_default_context()
         # to wrap a socket.
         conn = context.wrap_socket(socket.socket(socket.AF_INET), server_hostname=hostname, )
-        conn.settimeout(3.0)
+        #TIMEOUT WAS 3.0
+        conn.settimeout(1.0)
         conn.connect((hostname, 443))
         ssl_info = conn.getpeercert()
         Exp_ON = datetime.datetime.strptime(ssl_info['notAfter'], ssl_date_fmt)
@@ -241,7 +244,8 @@ def up_nazk(message):
                 hostname = hostname[2]
 
                 try:
-                    requests.get(x)
+                    #TIMEOUT WAS - NONE
+                    requests.get(x, timeout=1)
                     print(requests.get(x))
                     result_check = ssl_check_nazk(x)
                     result_check_days = str(result_check)
@@ -278,7 +282,8 @@ def ssl_check_nazk(hostname):
             ssl_date_fmt = r'%b %d %H:%M:%S %Y %Z'
             context = ssl.create_default_context()
             conn = context.wrap_socket(socket.socket(socket.AF_INET), server_hostname=hostname, )
-            conn.settimeout(5.0)
+            #TIMEOUT WAS 3.0
+            conn.settimeout(1.0)
             conn.connect((hostname, 443))
             ssl_info = conn.getpeercert()
             Exp_ON = datetime.datetime.strptime(ssl_info['notAfter'], ssl_date_fmt)
